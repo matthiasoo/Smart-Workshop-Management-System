@@ -1,0 +1,55 @@
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #2e3141;
+    background-color: #2e314155;
+    border-radius: 0.5rem;
+    width: 12rem;
+    height: 18rem;
+}
+
+.card-out {
+    border: 1px solid #412e2e;
+    background-color: #412e2e55;
+}
+
+.name {
+    font-size: 1.5rem;
+}
+
+.quantity-panel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+
+.control {
+    border: none;
+    background: none;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 0.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control:hover {
+    background-color: #16171d;
+}
+
+.control-out:hover {
+    background-color: #412e2e;
+}
+
+.out-of-stock-msg {
+    color: #ff0000;
+    position: absolute;
+    bottom: 0;
+}
