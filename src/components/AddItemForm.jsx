@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './AddItemForm.css';
 
 function AddItemForm({ onSubmit }) {
     const [newItemName, setNewItemName] = useState("");
@@ -15,7 +16,7 @@ function AddItemForm({ onSubmit }) {
     }
 
     return (
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className='add-item-form'>
             <h2>Add New Item</h2>
             <div className='input-and-btn'>
                 <input 
