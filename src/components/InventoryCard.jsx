@@ -1,6 +1,8 @@
+import { memo } from 'react'
 import './InventoryCard.css'
 
 function InventoryCard({ item, update }) {
+    console.log(`Renderuje się karta: ${item.name}`);
     const isOutOfStock = item.quantity === 0;
 
     return (
@@ -19,4 +21,4 @@ function InventoryCard({ item, update }) {
     )
 }
 
-export default InventoryCard
+export default memo(InventoryCard)
