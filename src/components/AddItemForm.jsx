@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import './AddItemForm.css';
+import { useInventory } from '../context/InventoryContext.jsx'
 
-function AddItemForm({ onSubmit }) {
+function AddItemForm() {
     const [newItemName, setNewItemName] = useState("");
+    const { addNewItem } = useInventory();
 
     const submit = (e) => {
         e.preventDefault();
@@ -11,7 +13,7 @@ function AddItemForm({ onSubmit }) {
             alert("Enter item name!")
             return;
         }
-        onSubmit(newItemName);
+        addNewItem(newItemName);
         setNewItemName("");
     }
 
