@@ -3,18 +3,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #2e3141;
-    background-color: #2e314155;
+    border: 1px solid var(--border-panel);
+    background-color: var(--bg-panel);
     border-radius: 0.5rem;
     padding: 1rem;
 }
 
 .text-input {
     display: flex;
-    color: #ffffff;
+    color: var(--text-primary);
     background: none;
     border: none;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid var(--text-primary);
 }
 
 .text-input:focus {
@@ -30,9 +30,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #2e3141;
-    color: #ffffff;
-    border: none;
+    color: var(--text-primary);
+    border: 1px solid var(--border-panel);
+    background: none;
     border-radius: 0.5rem;
     padding: 0.6rem 1rem;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: var(--border-panel);
 }

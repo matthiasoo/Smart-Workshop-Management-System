@@ -1,7 +1,22 @@
+:root {
+    --bg-main: #16171d;
+
+    --bg-panel: #2e314155;
+    --border-panel: #2e3141;
+
+    --bg-panel-danger: #412e2e55;
+    --border-panel-danger: #412e2e;
+
+    --text-primary: #ffffff;
+    --text-muted: #7e7e7e;
+
+    --color-danger: #ff0000;
+}
+
 body {
     font-family: 'Consolas', 'Courier New', monospace;
-    background-color: #16171d;
-    color: #ffffff;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
     display: flex;
     justify-content: center;
     align-items: center;

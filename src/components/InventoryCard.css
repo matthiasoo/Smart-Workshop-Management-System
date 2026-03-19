@@ -4,16 +4,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #2e3141;
-    background-color: #2e314155;
+    border: 1px solid var(--border-panel);
+    background-color: var(--bg-panel);
     border-radius: 0.5rem;
     width: 100%;
     height: 18rem;
 }
 
 .card-out {
-    border: 1px solid #412e2e;
-    background-color: #412e2e55;
+    border: 1px solid var(--border-panel-danger);
+    background-color: var(--bg-panel-danger);
 }
 
 .name {
@@ -30,7 +30,7 @@
 .control {
     border: none;
     background: none;
-    color: #ffffff;
+    color: var(--text-primary);
     cursor: pointer;
     border-radius: 0.2rem;
     width: 1.2rem;
@@ -41,15 +41,15 @@
 }
 
 .control:hover {
-    background-color: #16171d;
+    background-color: var(--border-panel);
 }
 
 .control-out:hover {
-    background-color: #412e2e;
+    background-color: var(--border-panel-danger);
 }
 
 .out-of-stock-msg {
-    color: #ff0000;
+    color: var(--color-danger);
     position: absolute;
     bottom: 0;
 }
