@@ -22,3 +22,30 @@ body {
     align-items: center;
     text-align: center;
 }
+
+.link {
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.link:hover {
+    transition: 200ms;
+    color: var(--text-muted);
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+}
+
+.fetching {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--text-muted);
+}
+
+.fetching-error {
+    font-size: 1rem;
+    color: var(--color-danger);
+}

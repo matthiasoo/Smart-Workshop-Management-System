@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Link } from 'react-router-dom'; 
 import './InventoryCard.css'
 import { useInventory } from '../context/InventoryContext.jsx'
 
@@ -8,7 +9,9 @@ function InventoryCard({ item }) {
 
     return (
         <div className={`card ${isOutOfStock ? 'card-out' : ''}`}>
-            <h1 className='name'>{item.name}</h1>
+            <Link to={`/item/${item.id}`} className='link'>
+                <h1 className='name'>{item.name}</h1>
+            </Link>
             <div className='quantity-panel'>
                 <button className={`control ${isOutOfStock ? 'control-out' : ''}`} onClick={() => {
                     if (item.quantity > 0) updateQuantity(item.id, item.quantity - 1);

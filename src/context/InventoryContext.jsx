@@ -14,14 +14,6 @@ function InventoryProvider({ children }) {
                 { id: 2, name: "Screwdriver", quantity: 20 },
                 { id: 3, name: "Shovel", quantity: 20 },
                 { id: 4, name: "Axe", quantity: 20 },
-                { id: 11, name: "Hammer", quantity: 20 },
-                { id: 21, name: "Screwdriver", quantity: 20 },
-                { id: 31, name: "Shovel", quantity: 20 },
-                { id: 41, name: "Axe", quantity: 20 },
-                { id: 12, name: "Hammer", quantity: 20 },
-                { id: 22, name: "Screwdriver", quantity: 20 },
-                { id: 32, name: "Shovel", quantity: 20 },
-                { id: 42, name: "Axe", quantity: 20 },
             ];
             if (data.length === 0) setError(new Error("Error connecting to server!"));
             else setInventory(data);
