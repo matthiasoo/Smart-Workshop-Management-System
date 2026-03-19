@@ -4,7 +4,7 @@ import { useInventory } from '../context/InventoryContext.jsx'
 
 function AddItemForm() {
     const [newItemName, setNewItemName] = useState("");
-    const { addNewItem } = useInventory();
+    const { addNewItem, isLoading } = useInventory();
 
     const submit = (e) => {
         e.preventDefault();
@@ -27,8 +27,13 @@ function AddItemForm() {
                     value={newItemName}
                     onChange={(e) => setNewItemName(e.target.value)}
                     className='text-input'
+                    disabled={isLoading}
                 />
-                <button type="submit" className='submit-btn'>Add</button>
+                <button 
+                    type="submit" 
+                    className='submit-btn'
+                    disabled={isLoading}
+                >Add</button>
             </div>
         </form>
     )
