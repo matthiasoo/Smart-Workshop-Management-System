@@ -35,9 +35,13 @@ function InventoryProvider({ children }) {
         setInventory([...inventory, { id: Date.now(), name: name, quantity: 0 }]);
     }
 
+    const deleteItem = (id) => {
+        setInventory(inventory.filter(item => item.id !== id));
+    }
+
     return (
-        // InventoryContext.Provider in older versions of react
-        <InventoryContext value={{ isLoading, error, inventory, updateQuantity, addNewItem }}>
+        // InventoryContext.Provider in older versions of React
+        <InventoryContext value={{ isLoading, error, inventory, updateQuantity, addNewItem, deleteItem }}>
             {children}
         </InventoryContext>
     )

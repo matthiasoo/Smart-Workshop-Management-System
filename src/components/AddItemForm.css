@@ -7,7 +7,8 @@
     background-color: var(--bg-panel);
     border-radius: 0.5rem;
     padding: 1rem;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5)
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+    gap: 1rem;
 }
 
 .text-input {
@@ -25,20 +26,4 @@
 .input-and-btn {
     display: flex;
     gap: 1rem;
-}
-
-.submit-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--text-primary);
-    border: 1px solid var(--border-panel);
-    background: none;
-    border-radius: 0.5rem;
-    padding: 0.6rem 1rem;
-    cursor: pointer;
-}
-
-.submit-btn:hover {
-    background-color: var(--border-panel);
 }

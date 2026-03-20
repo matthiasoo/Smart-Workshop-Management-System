@@ -1,11 +1,13 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { Link } from 'react-router-dom'; 
 import './InventoryCard.css'
 import { useInventory } from '../context/InventoryContext.jsx'
+import Modal from './Modal.jsx';
 
 function InventoryCard({ item }) {
     const isOutOfStock = item.quantity === 0;
-    const { updateQuantity } = useInventory();
+    const { updateQuantity, deleteItem } = useInventory();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className={`card ${isOutOfStock ? 'card-out' : ''}`}>
@@ -20,7 +22,18 @@ function InventoryCard({ item }) {
                 <button className={`control ${isOutOfStock ? 'control-out' : ''}`} 
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
             </div>
+            <button className='control' onClick={() => setIsModalOpen(true)}>Delete</button>
             {isOutOfStock && <h4 className='out-of-stock-msg'>Out of Stock!</h4>}
+            {isModalOpen && (
+            <Modal onClose={() => setIsModalOpen(false)}>
+                <h2>Warning</h2>
+                <p>Are you sure you want to permanently delete {item.name}?</p>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    <button className="submit-btn" onClick={() => deleteItem(item.id)}>Delete</button>
+                    <button className="submit-btn" onClick={() => setIsModalOpen(false)}>Cancel</button>
+                </div>
+            </Modal>
+        )}
         </div>
     )
 }

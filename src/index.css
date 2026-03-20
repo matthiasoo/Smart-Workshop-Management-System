@@ -1,7 +1,7 @@
 :root {
     --bg-main: #16171d;
 
-    --bg-panel: #2e314155;
+    --bg-panel: #1a1c24;
     --border-panel: #2e3141;
 
     --bg-panel-danger: #412e2e55;
@@ -17,6 +17,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
 
 body {
     font-family: 'Consolas', 'Courier New', monospace;
@@ -55,4 +56,20 @@ body {
 .fetching-error {
     font-size: 1rem;
     color: var(--color-danger);
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    border: 1px solid var(--border-panel);
+    background: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: var(--border-panel);
 }

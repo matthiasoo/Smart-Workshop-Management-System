@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './AddItemForm.css';
 import { useInventory } from '../context/InventoryContext.jsx'
 
 function AddItemForm() {
     const [newItemName, setNewItemName] = useState("");
     const { addNewItem, isLoading } = useInventory();
+    const inputRef = useRef(null);
 
     const submit = (e) => {
         e.preventDefault();
 
         if (newItemName === "") {
             alert("Enter item name!")
+            inputRef.current.focus();
             return;
         }
         addNewItem(newItemName);
@@ -28,6 +30,7 @@ function AddItemForm() {
                     onChange={(e) => setNewItemName(e.target.value)}
                     className='text-input'
                     disabled={isLoading}
+                    ref={inputRef}
                 />
                 <button 
                     type="submit" 
