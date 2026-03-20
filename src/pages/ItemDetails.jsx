@@ -11,8 +11,7 @@ function ItemDetails() {
     if (isLoading) {
         return (
             <main className='app-container'>
-                <h1>Item Details</h1>
-                <h1>Loading tool data...</h1>
+                <h1 className='fetching'>Loading tool data...</h1>
                 <Link to="/" className='link'>Back to inventory</Link>
             </main>
         );
@@ -21,7 +20,6 @@ function ItemDetails() {
     if (error) {
         return (
             <main className='app-container'>
-                <h1>Item Details</h1>
                 <h1 className='fetching-error'>{error.message}</h1>
                 <Link to="/" className='link'>Back to inventory</Link>
             </main>
@@ -31,7 +29,6 @@ function ItemDetails() {
     if (!item) {
         return (
             <main className='app-container'>
-                <h1>Item Details</h1>
                 <h1 className='fetching-error'>Tool not found!</h1>
                 <Link to="/" className='link'>Back to inventory</Link>
             </main>
@@ -40,10 +37,13 @@ function ItemDetails() {
 
     return (
         <main className='app-container'>
-            <h1>Item Details</h1>
-            <div>
-                <h2>Name: <span className='info'>{item.name}</span></h2>
-                <h2>Quantity: <span className='info'>{item.quantity}</span> pcs</h2>
+            <div className='details-panel'>
+                <h1>Details</h1>
+                <hr className='divider' />
+                <div className='details-content'>
+                    <h2>Name: <span>{item.name}</span></h2>
+                    <h2>Quantity: <span>{item.quantity}</span> pcs</h2>
+                </div>
             </div>
             <Link to="/" className='link'>Back to inventory</Link>
         </main>

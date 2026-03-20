@@ -1,0 +1,16 @@
+.navbar {
+    background-color: var(--bg-panel);
+    border-bottom: 1px solid var(--border-panel);
+    width: 100vw;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5)
+}
+
+.main-content {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}

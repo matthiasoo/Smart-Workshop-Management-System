@@ -9,7 +9,6 @@ function Home() {
 
     return (
         <main className='app-container'>
-            <h1>Smart Workshop Management System</h1>
             <h2>Total Number of Items: {useMemo(() => 
                 inventory.reduce((ac, cur) => ac + cur.quantity, 0), [inventory])}</h2>
             
