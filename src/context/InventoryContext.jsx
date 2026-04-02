@@ -10,10 +10,10 @@ function InventoryProvider({ children }) {
     useEffect(() => {
         setTimeout(() => {
             const data = [
-                { id: 1, name: "Hammer", quantity: 20 },
-                { id: 2, name: "Screwdriver", quantity: 20 },
-                { id: 3, name: "Shovel", quantity: 20 },
-                { id: 4, name: "Axe", quantity: 20 },
+                { id: 1, name: "Hammer", quantity: 20, description: "Strong, classic, iron hammer..." },
+                { id: 2, name: "Screwdriver", quantity: 20, description: "Just a simple screwdriver..." },
+                { id: 3, name: "Shovel", quantity: 20, description: "Dig or bury whatever you want!" },
+                { id: 4, name: "Axe", quantity: 20, description: "Cut trees like a real timberman!" },
             ];
             if (data.length === 0) setError(new Error("Error connecting to server!"));
             else setInventory(data);
@@ -31,8 +31,8 @@ function InventoryProvider({ children }) {
         })
     }, []);
 
-    const addNewItem = (name) => {
-        setInventory([...inventory, { id: Date.now(), name: name, quantity: 0 }]);
+    const addNewItem = (data) => {
+        setInventory([...inventory, { id: Date.now(), name: data.name, quantity: 0, description: data.description }]);
     }
 
     const deleteItem = (id) => {
