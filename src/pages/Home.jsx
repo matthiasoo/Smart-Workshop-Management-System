@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import InventoryCard from '../components/InventoryCard.jsx'
 import AddItemForm from '../components/AddItemForm.jsx'
-import { useInventory } from '../context/InventoryContext.jsx'
+import { useInventoryStore } from '../store/useInventoryStore.js';
 import './Home.css';
 
 function Home() {
-    const { inventory, isLoading, error } = useInventory();
+    const { inventory, isLoading, error } = useInventoryStore();
 
     return (
         <main className='app-container'>

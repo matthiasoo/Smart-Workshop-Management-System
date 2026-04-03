@@ -1,10 +1,10 @@
 import { useParams, Link } from 'react-router-dom';
-import { useInventory } from '../context/InventoryContext';
+import { useInventoryStore } from '../store/useInventoryStore.js';
 import './ItemDetails.css';
 
 function ItemDetails() {
     const { id } = useParams();
-    const { inventory, isLoading, error } = useInventory();
+    const { inventory, isLoading, error } = useInventoryStore();
 
     const item = inventory.find(item => item.id === Number(id));
 

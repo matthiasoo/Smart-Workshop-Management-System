@@ -1,12 +1,12 @@
 import { memo, useState } from 'react'
 import { Link } from 'react-router-dom'; 
 import './InventoryCard.css'
-import { useInventory } from '../context/InventoryContext.jsx'
+import { useInventoryStore } from '../store/useInventoryStore.js';
 import Modal from './Modal.jsx';
 
 function InventoryCard({ item }) {
     const isOutOfStock = item.quantity === 0;
-    const { updateQuantity, deleteItem } = useInventory();
+    const { updateQuantity, deleteItem } = useInventoryStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (

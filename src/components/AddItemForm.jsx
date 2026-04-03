@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import './AddItemForm.css';
-import { useInventory } from '../context/InventoryContext.jsx'
+import { useInventoryStore } from '../store/useInventoryStore.js';
 
 const formSchema = z.object({
     name: z.string().min(3, "Name must contain at least 3 characters").max(50, "Name is too long"),
@@ -11,7 +11,7 @@ const formSchema = z.object({
 
 function AddItemForm() {
 
-    const { addNewItem, isLoading } = useInventory();
+    const { addNewItem, isLoading } = useInventoryStore();
     const { register, handleSubmit, formState: { errors }, reset, setFocus } = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: { name: "", description: "" }
