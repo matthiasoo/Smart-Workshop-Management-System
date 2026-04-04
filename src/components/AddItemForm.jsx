@@ -1,7 +1,8 @@
+"use client"
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import './AddItemForm.css';
 import { useInventoryStore } from '../store/useInventoryStore.js';
 
 const formSchema = z.object({
@@ -24,11 +25,11 @@ function AddItemForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='add-item-form'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-center items-center border border-outline bg-panel rounded-[0.5rem] p-4 shadow-xl shadow-black gap-4'>
             <h2>Add New Item</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <input 
+            <div className='flex flex-col gap-4'>
+                <div className='flex flex-col'>
+                    <input
                         {...register("name")}
                         placeholder="Item name"
                         className='text-input'
@@ -36,17 +37,17 @@ function AddItemForm() {
                     />
                     {errors.name && <span className="fetching-error" style={{ fontSize: '0.8rem' }}>{errors.name.message}</span>}
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <input 
-                        {...register("description")} 
+                <div className='flex flex-col'>
+                    <input
+                        {...register("description")}
                         placeholder="Description"
                         className='text-input'
                         disabled={isLoading}
                     />
                     {errors.description && <span className="fetching-error" style={{ fontSize: '0.8rem' }}>{errors.description.message}</span>}
                 </div>
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     className='submit-btn'
                     disabled={isLoading}
                 >Add</button>
