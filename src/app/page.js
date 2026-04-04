@@ -16,7 +16,7 @@ function Home() {
         <main className='flex flex-col gap-8 w-full justify-center items-center mb-16'>
             <div className="glass-panel py-3 px-8 text-center flex items-center justify-center gap-4">
                 <h2 className="text-xl text-muted font-medium uppercase tracking-widest">Total Inventory</h2>
-                <span className="font-bold text-3xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">{useMemo(() =>
+                <span className="font-mono font-bold text-3xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">{useMemo(() =>
                     inventory.reduce((ac, cur) => ac + cur.quantity, 0), [inventory])}</span>
             </div>
 
