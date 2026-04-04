@@ -3,15 +3,18 @@
 @theme {
     --font-mono: 'Consolas', 'Courier New', monospace;
 
-    --color-main: oklch(0.18 0.015 260);
-    --color-panel: oklch(0.24 0.02 260);
-    --color-outline: oklch(0.35 0.03 260);
-    --color-danger: oklch(0.65 0.2 20);
-    --color-danger-panel: oklch(0.25 0.05 20); 
-    --color-danger-outline: oklch(0.4 0.08 20);
+    --color-main: var(--color-main);
+    --color-panel: var(--color-panel);
+    --color-outline: var(--color-outline);
+    --color-danger: var(--color-danger);
+    --color-danger-panel: var(--color-danger-panel);
+    --color-danger-outline: var(--color-danger-outline);
+    --color-primary: var(--color-primary);
+    --color-muted: var(--color-muted);
 
-    --color-primary: oklch(0.95 0.01 260);
-    --color-muted: oklch(0.6 0.02 260);
+    --shadow-panel: 0 8px 32px var(--color-shadow);
+    --shadow-glow: 0 0 20px var(--color-glow);
+    --shadow-hover: 0 4px 20px var(--color-glow);
 
     --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     --animate-scale-up: scale-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -27,6 +30,39 @@
 }
 
 @layer base {
+    :root {
+        --color-main: oklch(0.94 0.01 240);
+        --color-panel: oklch(0.99 0.005 240);
+        --color-outline: oklch(0.88 0.02 240);
+        
+        --color-danger: oklch(0.60 0.18 20);
+        --color-danger-panel: oklch(0.94 0.04 20); 
+        --color-danger-outline: oklch(0.85 0.06 20);
+        
+        --color-primary: oklch(0.35 0.03 240);
+        --color-muted: oklch(0.60 0.02 240);
+
+        --color-shadow: oklch(0.35 0.03 240 / 0.12);
+        --color-glow: oklch(0.80 0.04 240);
+        --color-glow-gradient: oklch(0.99 0.01 240);
+    }
+
+    .dark {
+        --color-main: oklch(0.18 0.015 260);
+        --color-panel: oklch(0.24 0.02 260);
+        --color-outline: oklch(0.35 0.03 260);
+        --color-danger: oklch(0.65 0.2 20);
+        --color-danger-panel: oklch(0.25 0.05 20); 
+        --color-danger-outline: oklch(0.4 0.08 20);
+        
+        --color-primary: oklch(0.95 0.01 260);
+        --color-muted: oklch(0.6 0.02 260);
+
+        --color-shadow: rgba(0, 0, 0, 0.4);
+        --color-glow: oklch(0.35 0.08 260);
+        --color-glow-gradient: oklch(0.27 0.05 260);
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -35,7 +71,7 @@
 
     body {
         background-color: var(--color-main);
-        background-image: radial-gradient(circle at 50% -10%, oklch(0.28 0.03 260) 0%, transparent 60%); 
+        background-image: radial-gradient(circle at 50% -10%, var(--color-glow-gradient) 0%, transparent 60%); 
         color: var(--color-primary);
         display: flex;
         flex-direction: column;
@@ -43,24 +79,25 @@
         justify-content: flex-start;
         align-items: center;
         text-align: center;
-        overflow-x: hidden;
+        overflow-x: hidden; 
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
     }
 }
 
 @layer components {
     .submit-btn {
         @apply flex justify-center items-center py-3 px-6 rounded-xl w-full;
-        @apply bg-gradient-to-r from-panel to-main border border-outline shadow-lg;
+        @apply bg-gradient-to-r from-panel to-main border border-outline shadow-panel;
         @apply text-primary font-bold cursor-pointer uppercase tracking-wider text-sm;
         @apply transition-all duration-300;
-        @apply hover:-translate-y-1 hover:shadow-[0_4px_20px_oklch(0.35_0.03_260)] hover:border-muted;
+        @apply hover:-translate-y-1 hover:shadow-hover hover:border-muted;
         @apply active:translate-y-0 active:scale-95 active:shadow-none;
     }
 
     .link {
         @apply no-underline text-primary font-medium flex items-center gap-2;
-        @apply hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)];
-        @apply transition-all duration-300 hover:scale-105 active:scale-95;
+        @apply hover:text-muted hover:drop-shadow-[0_0_8px_var(--color-glow)];
+        @apply transition-all duration-300 hover:scale-[1.03] active:scale-95;
     }
 
     .fetching {
@@ -74,16 +111,16 @@
     .text-input {
         @apply flex w-full text-primary bg-main/50 border border-outline rounded-lg py-3 px-4;
         @apply backdrop-blur-sm transition-all duration-300 outline-none shadow-inner;
-        @apply focus:border-muted focus:ring-2 focus:ring-muted/30 focus:bg-panel focus:shadow-[0_0_15px_oklch(0.35_0.03_260)];
+        @apply focus:border-muted focus:ring-2 focus:ring-muted/30 focus:bg-panel focus:shadow-glow;
     }
 
     .control {
         @apply bg-main/70 border border-outline text-primary cursor-pointer rounded-lg w-10 h-10 flex justify-center items-center shadow-md;
         @apply transition-all duration-300;
-        @apply hover:bg-outline hover:scale-110 active:scale-90 hover:shadow-[0_0_10px_oklch(0.35_0.03_260)] hover:border-primary/50;
+        @apply hover:bg-outline hover:scale-110 active:scale-90 hover:shadow-glow hover:border-primary/50;
     }
 
     .glass-panel {
-        @apply bg-panel/70 backdrop-blur-xl border border-outline shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-2xl;
+        @apply bg-panel/70 backdrop-blur-xl border border-outline shadow-panel rounded-2xl;
     }
 }

@@ -1,18 +1,20 @@
 "use client"
 
 import { memo, useState } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { FiPlus, FiMinus } from "react-icons/fi";
 import { useInventoryStore } from '../store/useInventoryStore.js';
 import Modal from './Modal.jsx';
+import { useTranslations } from 'next-intl';
 
 function InventoryCard({ item }) {
     const isOutOfStock = item.quantity === 0;
     const { updateQuantity, deleteItem } = useInventoryStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const t = useTranslations();
 
     return (
-        <div className={`relative flex flex-col justify-center items-center w-full min-h-72 h-fit p-6 gap-4 border glass-panel animate-fade-in transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] ${isOutOfStock ? 'border-danger-outline shadow-[0_0_15px_oklch(0.65_0.2_20_/_0.2)]' : 'border-outline hover:border-primary/50'}`}>
+        <div className={`relative flex flex-col justify-center items-center w-full min-h-72 h-fit p-6 gap-4 border glass-panel animate-fade-in transition-all duration-300 hover:scale-[1.02] hover:shadow-hover ${isOutOfStock ? 'border-danger-outline shadow-[0_0_15px_var(--color-danger)]' : 'border-outline hover:border-primary/50'}`}>
             <Link href={`/item/${item.id}`} className='link text-xl lg:text-2xl mt-4'>
                 <h1 className='text-center uppercase tracking-widest leading-tight'>{item.name}</h1>
             </Link>
@@ -27,16 +29,16 @@ function InventoryCard({ item }) {
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}><FiPlus /></button>
             </div>
             
-            <button className='submit-btn mt-auto text-red-500 bg-none border border-red-900/50 hover:bg-red-900/30 hover:shadow-none hover:text-white backdrop-blur-sm' onClick={() => setIsModalOpen(true)}>Delete</button>
+            <button className='submit-btn mt-auto text-red-500 bg-none border border-red-900/50 hover:bg-red-900/30 hover:shadow-none hover:text-white backdrop-blur-sm' onClick={() => setIsModalOpen(true)}>{t('common.actions.delete')}</button>
             
-            {isOutOfStock && <h4 className='text-danger absolute -top-3 left-1/2 -translate-x-1/2 uppercase tracking-widest font-bold text-xs bg-danger-panel px-4 py-1.5 rounded-full border border-danger shadow-[0_0_15px_oklch(0.65_0.2_20_/_0.8)] animate-pulse whitespace-nowrap z-10'>Out of Stock!</h4>}
+            {isOutOfStock && <h4 className='text-danger absolute -top-3 left-1/2 -translate-x-1/2 uppercase tracking-widest font-bold text-xs bg-danger-panel px-4 py-1.5 rounded-full border border-danger shadow-[0_0_15px_oklch(0.65_0.2_20_/_0.8)] animate-pulse whitespace-nowrap z-10'>{t('common.status.out_of_stock')}!</h4>}
             {isModalOpen && (
-                <Modal onClose={() => setIsModalOpen(false)}>
-                    <h2>Warning</h2>
-                    <p>Are you sure you want to permanently delete {item.name}?</p>
+                <Modal onClose={() => setIsModalOpen(false)} isOpen={isModalOpen}>
+                    <h2>{t('common.titles.warning')}</h2>
+                    <p>{t('dialogs.delete_item.description', { name: item.name })}</p>
                     <div style={{ display: 'flex', gap: '1rem' }}>
-                        <button className="submit-btn" onClick={() => deleteItem(item.id)}>Delete</button>
-                        <button className="submit-btn" onClick={() => setIsModalOpen(false)}>Cancel</button>
+                        <button className="submit-btn" onClick={() => deleteItem(item.id)}>{t('dialogs.delete_item.delete')}</button>
+                        <button className="submit-btn" onClick={() => setIsModalOpen(false)}>{t('dialogs.delete_item.cancel')}</button>
                     </div>
                 </Modal>
             )}
