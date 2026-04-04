@@ -25,32 +25,34 @@ function AddItemForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col justify-center items-center border border-outline bg-panel rounded-[0.5rem] p-4 shadow-xl shadow-black gap-4'>
-            <h2>Add New Item</h2>
-            <div className='flex flex-col gap-4'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col glass-panel p-8 w-full gap-6 relative overflow-hidden group'>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            
+            <h2 className="text-2xl font-bold text-white uppercase tracking-widest text-center mt-2 drop-shadow-md">Add New Object</h2>
+            <div className='flex flex-col gap-6 mt-4'>
                 <div className='flex flex-col'>
-                    <input
+                    <input 
                         {...register("name")}
-                        placeholder="Item name"
+                        placeholder="Tool designation"
                         className='text-input'
                         disabled={isLoading}
                     />
-                    {errors.name && <span className="fetching-error" style={{ fontSize: '0.8rem' }}>{errors.name.message}</span>}
+                    {errors.name && <span className="fetching-error mt-2 text-xs self-end text-right drop-shadow-none">{errors.name.message}</span>}
                 </div>
-                <div className='flex flex-col'>
-                    <input
-                        {...register("description")}
-                        placeholder="Description"
+                <div className='flex flex-col mt-2'>
+                    <input 
+                        {...register("description")} 
+                        placeholder="Specifications / Description"
                         className='text-input'
                         disabled={isLoading}
                     />
-                    {errors.description && <span className="fetching-error" style={{ fontSize: '0.8rem' }}>{errors.description.message}</span>}
+                    {errors.description && <span className="fetching-error mt-2 text-xs self-end text-right drop-shadow-none">{errors.description.message}</span>}
                 </div>
-                <button
-                    type="submit"
-                    className='submit-btn'
+                <button 
+                    type="submit" 
+                    className='submit-btn mt-4'
                     disabled={isLoading}
-                >Add</button>
+                >Register Item</button>
             </div>
         </form>
     )

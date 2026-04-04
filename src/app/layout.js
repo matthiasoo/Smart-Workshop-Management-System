@@ -7,12 +7,12 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body>
-                <header className="bg-panel border-b border-outline w-[100vw] h-16 flex justify-center items-center shadow-xl shadow-black">
-                    <Link href="/" className="link">
-                        <h1>Smart Workshop</h1>
+                <header className="w-full h-16 sticky top-0 z-50 bg-panel/75 backdrop-blur-xl border-b border-outline/50 shadow-[0_4px_30px_rgba(0,0,0,0.3)] flex justify-center items-center px-4">
+                    <Link href="/" className="link text-2xl font-bold tracking-wider uppercase text-blue-100 drop-shadow-md hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]">
+                        Smart Workshop
                     </Link>
                 </header>
-                <main className="flex justify-center mt-4">
+                <main className="mt-8 flex justify-center items-start w-full px-4 animate-fade-in relative z-10 h-full">
                     {children}
                 </main>
                 <div id="modal-root"></div>

@@ -3,15 +3,27 @@
 @theme {
     --font-mono: 'Consolas', 'Courier New', monospace;
 
-    --color-main: oklch(0.2063 0.012 277.83);
-    --color-panel: oklch(0.228 0.0158 274.07);
-    --color-outline: oklch(0.3172 0.0289 276.35);
-    --color-danger: oklch(0.628 0.2577 29.23);
-    --color-danger-panel: oklch(0.2062 0.0281 18.72);
-    --color-danger-outline: oklch(0.3233 0.0281 18.72);
+    --color-main: oklch(0.18 0.015 260);
+    --color-panel: oklch(0.24 0.02 260);
+    --color-outline: oklch(0.35 0.03 260);
+    --color-danger: oklch(0.65 0.2 20);
+    --color-danger-panel: oklch(0.25 0.05 20); 
+    --color-danger-outline: oklch(0.4 0.08 20);
 
-    --color-primary: oklch(1 0 0);
-    --color-muted: oklch(0.5931 0 0);
+    --color-primary: oklch(0.95 0.01 260);
+    --color-muted: oklch(0.6 0.02 260);
+
+    --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-scale-up: scale-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scale-up {
+        from { opacity: 0; transform: scale(0.95) translateY(5px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
 }
 
 @layer base {
@@ -23,6 +35,7 @@
 
     body {
         background-color: var(--color-main);
+        background-image: radial-gradient(circle at 50% -10%, oklch(0.28 0.03 260) 0%, transparent 60%); 
         color: var(--color-primary);
         display: flex;
         flex-direction: column;
@@ -30,38 +43,47 @@
         justify-content: flex-start;
         align-items: center;
         text-align: center;
+        overflow-x: hidden;
     }
 }
 
 @layer components {
     .submit-btn {
-        @apply flex justify-center items-center bg-transparent py-2 px-4;
-        @apply border border-outline rounded-[0.5rem];
-        @apply text-primary cursor-pointer;
-        @apply hover:bg-outline;
+        @apply flex justify-center items-center py-3 px-6 rounded-xl w-full;
+        @apply bg-gradient-to-r from-panel to-main border border-outline shadow-lg;
+        @apply text-primary font-bold cursor-pointer uppercase tracking-wider text-sm;
+        @apply transition-all duration-300;
+        @apply hover:-translate-y-1 hover:shadow-[0_4px_20px_oklch(0.35_0.03_260)] hover:border-muted;
+        @apply active:translate-y-0 active:scale-95 active:shadow-none;
     }
 
     .link {
-        @apply no-underline text-primary;
-        @apply hover:text-muted;
-        @apply transition-colors duration-200;
+        @apply no-underline text-primary font-medium flex items-center gap-2;
+        @apply hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)];
+        @apply transition-all duration-300 hover:scale-105 active:scale-95;
     }
 
     .fetching {
-        @apply text-muted;
+        @apply text-muted font-bold tracking-widest uppercase animate-pulse drop-shadow-md;
     }
 
     .fetching-error {
-        @apply text-danger;
+        @apply text-danger font-bold tracking-widest uppercase animate-pulse drop-shadow-[0_0_10px_var(--color-danger)];
     }
 
     .text-input {
-        @apply flex text-primary bg-transparent border-b border-primary;
-        @apply focus-visible:outline-2;
+        @apply flex w-full text-primary bg-main/50 border border-outline rounded-lg py-3 px-4;
+        @apply backdrop-blur-sm transition-all duration-300 outline-none shadow-inner;
+        @apply focus:border-muted focus:ring-2 focus:ring-muted/30 focus:bg-panel focus:shadow-[0_0_15px_oklch(0.35_0.03_260)];
     }
 
     .control {
-        @apply border-none bg-transparent text-primary cursor-pointer rounded-[0.2rem] min-w-5 h-5 p-1 flex justify-center items-center;
-        @apply transition-colors duration-200;
+        @apply bg-main/70 border border-outline text-primary cursor-pointer rounded-lg w-10 h-10 flex justify-center items-center shadow-md;
+        @apply transition-all duration-300;
+        @apply hover:bg-outline hover:scale-110 active:scale-90 hover:shadow-[0_0_10px_oklch(0.35_0.03_260)] hover:border-primary/50;
+    }
+
+    .glass-panel {
+        @apply bg-panel/70 backdrop-blur-xl border border-outline shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-2xl;
     }
 }
