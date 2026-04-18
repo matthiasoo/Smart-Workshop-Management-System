@@ -91,8 +91,8 @@
         @apply bg-gradient-to-r from-panel to-main border border-outline shadow-panel;
         @apply text-primary font-bold cursor-pointer uppercase tracking-wider text-sm;
         @apply transition-all duration-300;
-        @apply hover:-translate-y-1 hover:shadow-hover hover:border-muted;
-        @apply active:translate-y-0 active:scale-95 active:shadow-none;
+        /* @apply hover:-translate-y-1 hover:shadow-hover hover:border-muted;
+        @apply active:translate-y-0 active:scale-95 active:shadow-none; */
     }
 
     .link {
