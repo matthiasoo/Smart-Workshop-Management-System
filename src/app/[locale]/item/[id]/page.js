@@ -1,42 +1,18 @@
-"use client";
-
-import { useTranslations } from 'next-intl'; 
-import { useParams } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/routing';
-import { useInventoryStore } from '@/store/useInventoryStore.js';
+import { prisma } from '@/lib/prisma';
 
-function ItemDetails() {
-    const { id } = useParams();
-    const { inventory, isLoading, error } = useInventoryStore();
-    const t = useTranslations();
+export default async function ItemDetails({ params }) {
+    const { id } = await params;
+    const t = await getTranslations();
 
-    const item = inventory.find(item => item.id === Number(id));
-
-    if (isLoading) {
-        return (
-            <main className='flex flex-col gap-8 justify-center items-center mt-24'>
-                <h1 className='fetching text-3xl'>{t('common.status.accessing')}...</h1>
-                <Link href="/" className='link'>{t('common.actions.abort')}</Link>
-            </main>
-        );
-    }
-
-    if (error) {
-        return (
-            <main className='flex flex-col gap-8 justify-center items-center mt-24'>
-                <h1 className='fetching-error text-3xl'>{error.message}</h1>
-                <Link href="/" className='link'>{t('common.actions.back')}</Link>
-            </main>
-        );
-    }
+    const item = await prisma.inventoryItem.findUnique({
+        where: { id: id }
+    });
 
     if (!item) {
-        return (
-            <main className='flex flex-col gap-8 justify-center items-center mt-24'>
-                <h1 className='fetching-error text-3xl'>{t('common.status.not_found')}</h1>
-                <Link href="/" className='link'>{t('common.actions.back')}</Link>
-            </main>
-        );
+        notFound(); 
     }
 
     return (
@@ -52,6 +28,12 @@ function ItemDetails() {
                         <span className="text-muted tracking-widest uppercase text-sm font-bold">{t('features.inventory.fields.name')}</span>
                         <h2 className='text-2xl font-bold text-white uppercase'>{item.name}</h2>
                     </div>
+                    {item.description && (
+                        <div className="w-full bg-main/30 p-5 rounded-xl border border-outline/30 flex flex-col justify-between items-start hover:bg-main/50 transition-colors gap-2">
+                            <span className="text-muted tracking-widest uppercase text-sm font-bold">{t('features.inventory.fields.description')}</span>
+                            <span className='text-lg font-medium text-white/80'>{item.description}</span>
+                        </div>
+                    )}
                     <div className="w-full bg-main/30 p-5 rounded-xl border border-outline/30 flex flex-col sm:flex-row justify-between items-start sm:items-center hover:bg-main/50 transition-colors gap-2">
                         <span className="text-muted tracking-widest uppercase text-sm font-bold">{t('features.inventory.fields.units')}</span>
                         <h2 className='text-4xl font-mono font-bold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]'>{item.quantity}</h2>
@@ -65,5 +47,3 @@ function ItemDetails() {
         </main>
     )
 }
-
-export default ItemDetails

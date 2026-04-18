@@ -3,13 +3,12 @@
 import { memo, useState } from 'react';
 import { Link } from '@/i18n/routing';
 import { FiPlus, FiMinus } from "react-icons/fi";
-import { useInventoryStore } from '../store/useInventoryStore.js';
 import Modal from './Modal.jsx';
 import { useTranslations } from 'next-intl';
+import { updateItemQuantity, deleteInventoryItem } from '@/actions/inventoryActions';
 
 function InventoryCard({ item }) {
     const isOutOfStock = item.quantity === 0;
-    const { updateQuantity, deleteItem } = useInventoryStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const t = useTranslations();
 
@@ -22,11 +21,11 @@ function InventoryCard({ item }) {
                 <button className={`control ${isOutOfStock ? 'hover:bg-danger-outline opacity-50 cursor-not-allowed border-danger-outline text-danger' : 'hover:bg-outline'}`} 
                     disabled={isOutOfStock}
                     onClick={() => {
-                    if (item.quantity > 0) updateQuantity(item.id, item.quantity - 1);
+                    if (item.quantity > 0) updateItemQuantity(item.id, item.quantity - 1);
                 }}><FiMinus /></button>
                 <span className="font-mono text-3xl font-bold w-12 text-center drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">{item.quantity}</span>
                 <button className={`control ${isOutOfStock ? 'hover:bg-danger-outline border-danger-outline text-danger hover:text-white' : 'hover:bg-outline'}`}
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}><FiPlus /></button>
+                    onClick={() => updateItemQuantity(item.id, item.quantity + 1)}><FiPlus /></button>
             </div>
             
             <button className='submit-btn mt-auto text-red-500 bg-none border border-red-900/50 hover:bg-red-900/30 hover:shadow-none hover:text-white backdrop-blur-sm' onClick={() => setIsModalOpen(true)}>{t('common.actions.delete')}</button>
@@ -37,7 +36,7 @@ function InventoryCard({ item }) {
                     <h2>{t('common.titles.warning')}</h2>
                     <p>{t('dialogs.delete_item.description', { name: item.name })}</p>
                     <div style={{ display: 'flex', gap: '1rem' }}>
-                        <button className="submit-btn" onClick={() => deleteItem(item.id)}>{t('dialogs.delete_item.delete')}</button>
+                        <button className="submit-btn" onClick={() => deleteInventoryItem(item.id)}>{t('dialogs.delete_item.delete')}</button>
                         <button className="submit-btn" onClick={() => setIsModalOpen(false)}>{t('dialogs.delete_item.cancel')}</button>
                     </div>
                 </Modal>

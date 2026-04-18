@@ -3,27 +3,30 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { useInventoryStore } from '../store/useInventoryStore.js';
 import { useTranslations } from 'next-intl';
+import { useTransition } from 'react';
+import { addInventoryItem } from '@/actions/inventoryActions';
+
 
 function AddItemForm() {
-
+    const [isPending, startTransition] = useTransition();
     const t = useTranslations();
     const formSchema = z.object({
         name: z.string().min(3, t('errors.min_characters', { number: 3 })).max(50, t('errors.name_too_long')),
         description: z.string().max(200, t('errors.desc_too_long')).optional()
     });
 
-    const { addNewItem, isLoading } = useInventoryStore();
     const { register, handleSubmit, formState: { errors }, reset, setFocus } = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: { name: "", description: "" }
     });
 
     const onSubmit = (data) => {
-        addNewItem(data);
-        reset();
-        setFocus("name");
+        startTransition(async () => {
+            await addInventoryItem(data);
+            reset();
+            setFocus("name");
+        });
     }
 
     return (
@@ -37,7 +40,7 @@ function AddItemForm() {
                         {...register("name")}
                         placeholder={t('features.inventory.fields.name')}
                         className='text-input'
-                        disabled={isLoading}
+                        disabled={isPending}
                     />
                     {errors.name && <span className="fetching-error mt-2 text-xs self-end text-right drop-shadow-none">{errors.name.message}</span>}
                 </div>
@@ -46,14 +49,14 @@ function AddItemForm() {
                         {...register("description")} 
                         placeholder={t('features.inventory.fields.description')}
                         className='text-input'
-                        disabled={isLoading}
+                        disabled={isPending}
                     />
                     {errors.description && <span className="fetching-error mt-2 text-xs self-end text-right drop-shadow-none">{errors.description.message}</span>}
                 </div>
                 <button 
                     type="submit" 
                     className='submit-btn mt-4'
-                    disabled={isLoading}
+                    disabled={isPending}
                 >{t('common.actions.register_item')}</button>
             </div>
         </form>
