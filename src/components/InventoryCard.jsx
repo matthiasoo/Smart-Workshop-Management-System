@@ -2,15 +2,18 @@
 
 import { memo, useState } from 'react';
 import { Link } from '@/i18n/routing';
-import { FiPlus, FiMinus } from "react-icons/fi";
+import { FiPlus, FiMinus, FiTrash, FiEdit, FiX, FiCheck } from "react-icons/fi";
 import Modal from './Modal.jsx';
 import { useTranslations } from 'next-intl';
 import { updateItemQuantity, deleteInventoryItem } from '@/actions/inventoryActions';
 
 function InventoryCard({ item }) {
     const isOutOfStock = item.quantity === 0;
+    const [itemQuantity, setItemQuantity] = useState(item.quantity);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editMode, setEditMode] = useState(false);
     const t = useTranslations();
+
 
     return (
         <div className={`relative flex flex-col justify-center items-center w-full min-h-72 h-fit p-6 gap-4 border glass-panel animate-fade-in transition-all duration-300 hover:scale-[1.02] hover:shadow-hover ${isOutOfStock ? 'border-danger-outline shadow-[0_0_15px_var(--color-danger)]' : 'border-outline hover:border-primary/50'}`}>
@@ -18,17 +21,36 @@ function InventoryCard({ item }) {
                 <h1 className='text-center uppercase tracking-widest leading-tight'>{item.name}</h1>
             </Link>
             <div className='flex items-center gap-6 text-xl my-4'>
-                <button className={`control ${isOutOfStock ? 'hover:bg-danger-outline opacity-50 cursor-not-allowed border-danger-outline text-danger' : 'hover:bg-outline'}`} 
+                <button className={`${editMode ? '' : 'invisible'} control ${isOutOfStock ? 'hover:bg-danger-outline opacity-50 cursor-not-allowed border-danger-outline text-danger' : 'hover:bg-outline'}`} 
                     disabled={isOutOfStock}
                     onClick={() => {
-                    if (item.quantity > 0) updateItemQuantity(item.id, item.quantity - 1);
+                    if (item.quantity > 0) setItemQuantity(itemQuantity - 1);
                 }}><FiMinus /></button>
-                <span className="font-mono text-3xl font-bold w-12 text-center drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">{item.quantity}</span>
-                <button className={`control ${isOutOfStock ? 'hover:bg-danger-outline border-danger-outline text-danger hover:text-white' : 'hover:bg-outline'}`}
-                    onClick={() => updateItemQuantity(item.id, item.quantity + 1)}><FiPlus /></button>
+                <span className="font-mono text-3xl font-bold w-12 text-center drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">{itemQuantity}</span>
+                <button className={`${editMode ? '' : 'invisible'} control ${isOutOfStock ? 'hover:bg-danger-outline border-danger-outline text-danger hover:text-white' : 'hover:bg-outline'}`}
+                    onClick={() => setItemQuantity(itemQuantity + 1)}><FiPlus /></button>
             </div>
             
-            <button className='submit-btn mt-auto text-red-500 bg-none border border-red-900/50 hover:bg-red-900/30 hover:shadow-none hover:text-white backdrop-blur-sm' onClick={() => setIsModalOpen(true)}>{t('common.actions.delete')}</button>
+            <div className='flex gap-2'>
+                <button 
+                    className='submit-btn mt-auto text-red-500 bg-none border border-red-900/50 hover:bg-red-900/30 hover:shadow-none backdrop-blur-sm' 
+                    onClick={() => {
+                        if (editMode) {
+                            setItemQuantity(item.quantity);
+                            setEditMode(false);
+                        } else setIsModalOpen(true);
+                    }}
+                >{editMode ? <FiX /> : <FiTrash />}</button>
+                <button 
+                    className='submit-btn mt-auto bg-none border hover:bg-white/10 hover:shadow-none backdrop-blur-sm' 
+                    onClick={() => {
+                        if (editMode) {
+                            updateItemQuantity(item.id, itemQuantity);
+                            setEditMode(false);
+                        } else setEditMode(true);
+                    }}
+                >{editMode ? <FiCheck /> : <FiEdit />}</button>
+            </div>
             
             {isOutOfStock && <h4 className='text-danger absolute -top-3 left-1/2 -translate-x-1/2 uppercase tracking-widest font-bold text-xs bg-danger-panel px-4 py-1.5 rounded-full border border-danger shadow-[0_0_15px_oklch(0.65_0.2_20_/_0.8)] animate-pulse whitespace-nowrap z-10'>{t('common.status.out_of_stock')}!</h4>}
             {isModalOpen && (
