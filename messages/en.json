@@ -7,7 +7,9 @@
       "confirm": "Confirm",
       "save": "Save changes",
       "delete": "Delete",
-      "search": "Search"
+      "search": "Search",
+      "logout": "Log out",
+      "login": "Log in"
     },
     "status": {
       "loading": "Connecting to database",
@@ -19,7 +21,8 @@
     },
     "titles": {
       "warning": "Warning",
-      "add_new_item": "Add New Item"
+      "add_new_item": "Add New Item",
+      "slogan": "Log in to access the storage"
     }
   },
   "components": {

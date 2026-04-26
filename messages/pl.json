@@ -7,7 +7,9 @@
       "confirm": "Zatwierdź",
       "save": "Zapisz zmiany",
       "delete": "Usuń",
-      "search": "Wyszukaj"
+      "search": "Wyszukaj",
+      "logout": "Wyloguj się",
+      "login": "Zaloguj się"
     },
     "status": {
       "loading": "Łączenie z bazą danych",
@@ -19,7 +21,8 @@
     },
     "titles": {
       "warning": "Ostrzeżenie",
-      "add_new_item": "Dodaj Nowy Przedmiot"
+      "add_new_item": "Dodaj Nowy Przedmiot",
+      "slogan": "Zaloguj się, aby uzyskać dostęp do magazynu"
     }
   },
   "components": {
