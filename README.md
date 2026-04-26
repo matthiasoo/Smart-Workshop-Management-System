@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Workshop Management System 🛠️
 
-## Getting Started
+A modern, full-stack web application designed for managing workshop inventory. Born as a basic state-managed project and evolved into a robust, production-ready Full-Stack system featuring a relational database, server-side actions, seamless authentication, and AI integrations.
 
-First, run the development server:
+## Features ✨
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Complete CRUD Functionality**: Add, edit, remove, and manage tools using fast Next.js Server Actions.
+- **AI-Powered Auto-Descriptions**: Integrated Groq SDK (Powered by Llama 3) to automatically generate technical descriptions of tools based purely on their names.
+- **Authentication & Security**: Protected views and API calls utilizing **Auth.js v5** (Google OAuth integration).
+- **Relational Database**: Connected to a **Neon PostgreSQL** database managed via **Prisma ORM**.
+- **Internationalization (i18n)**: Fully translated into Polish and English with seamless language toggles using `next-intl`.
+- **Dynamic URL-based Search**: Performant client-side search where queries are managed via URL parameters (`?search=...`) for shareable links.
+- **Theming**: Integrated Dark & Light mode toggle with `next-themes`.
+- **Responsive UI**: Built entirely with standard Tailwind CSS and modern Web Design principles.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack 🚀
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Framework:** Next.js (App Router, Server Components, Server Actions)
+- **Styling:** Tailwind CSS
+- **Database:** PostgreSQL (NeonDB)
+- **ORM:** Prisma
+- **Auth:** Auth.js (NextAuth Beta v5)
+- **AI Provider:** Groq (Llama-3.3-70b-versatile)
+- **i18n:** next-intl
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Getting Started ⚙️
 
-## Learn More
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/matthiasoo/Smart-Workshop-Management-System.git
+   cd Smart-Workshop-Management-System
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Set up environment variables:**
+   Create a `.env` file in the root directory and add the following keys:
+   ```env
+   # PostgreSQL database URL (NeonDB)
+   DATABASE_URL="postgresql://user:password@hostname/neondb?sslmode=verify-full"
+   
+   # Groq API for AI Features
+   GROQ_API_KEY="your_groq_api_key"
+   
+   # Auth.js Configuration
+   AUTH_SECRET="your_generated_auth_secret"
+   AUTH_GOOGLE_ID="your_google_oauth_client_id"
+   AUTH_GOOGLE_SECRET="your_google_oauth_secret"
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Initialize the Database:**
+   Push the Prisma schema to configure the PostgreSQL structure:
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
 
-## Deploy on Vercel
+5. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) with your browser to explore the workshop.
