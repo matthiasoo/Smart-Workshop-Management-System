@@ -3,10 +3,18 @@
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 
-export async function fetchInventory() {
+export async function fetchInventory(searchParams = { search: ""}) {
+    const { search } = searchParams;
+    
     return await prisma.inventoryItem.findMany({
-        orderBy: { createdAt: 'asc' }
-    });
+        orderBy: { createdAt: 'desc' },
+        where: search ? {
+            name: {
+                contains: search,
+                mode: "insensitive",
+            }
+        } : {}
+    })
 }
 
 export async function addInventoryItem(data) {

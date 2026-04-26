@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/routing';
 import { prisma } from '@/lib/prisma';
+import { FiChevronLeft } from 'react-icons/fi';
 
 export default async function ItemDetails({ params }) {
     const { id } = await params;
@@ -42,7 +43,7 @@ export default async function ItemDetails({ params }) {
             </div>
             
             <Link href="/" className='link mt-4 px-8 py-4 bg-panel/50 rounded-full border border-outline hover:border-primary/50 shadow-lg text-sm tracking-widest uppercase'>
-                ← {t('common.actions.back')}
+                <FiChevronLeft /> {t('common.actions.back')}
             </Link>
         </main>
     )

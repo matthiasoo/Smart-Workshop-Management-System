@@ -33,7 +33,7 @@ export default async function RootLayout({ children, params }) {
                 <Providers>
                     <NextIntlClientProvider messages={messages}>
                         <header className="w-full h-16 sticky top-0 z-50 bg-panel/75 backdrop-blur-xl border-b border-outline/50 shadow-panel flex justify-between items-center px-4 transition-colors duration-500">
-                            <Link href="/" className="link text-2xl text-primary drop-shadow-sm hover:drop-shadow-[0_0_10px_var(--color-glow)]">
+                            <Link href="/" className="link text-xl text-primary drop-shadow-sm hover:drop-shadow-[0_0_10px_var(--color-glow)]">
                                 Smart Workshop
                             </Link>
                             <div className="flex items-center">

@@ -1,53 +1,54 @@
 {
-    "common": {
-        "actions": {
-            "register_item": "Register Item",
-            "back": "Return",
-            "abort": "Abort connection",
-            "confirm": "Confirm",
-            "save": "Save changes",
-            "delete": "Delete"
-        },
-        "status": {
-            "loading": "Connecting to database",
-            "accessing": "Accessing record",
-            "empty": "No items found",
-            "not_found": "Record not found",
-            "success": "Action completed",
-            "out_of_stock": "Out of Stock"
-        },
-        "titles": {
-            "warning": "Warning",
-            "add_new_item": "Add New Item"
-        }
+  "common": {
+    "actions": {
+      "register_item": "Register Item",
+      "back": "Return",
+      "abort": "Abort connection",
+      "confirm": "Confirm",
+      "save": "Save changes",
+      "delete": "Delete",
+      "search": "Search"
     },
-    "components": {
-        "table": {
-            "total": "Total inventory",
-            "record": "Database record"
-        }
+    "status": {
+      "loading": "Connecting to database",
+      "accessing": "Accessing record",
+      "empty": "No items found",
+      "not_found": "Record not found",
+      "success": "Action completed",
+      "out_of_stock": "Out of Stock"
     },
-    "features": {
-        "inventory": {
-            "title": "Inventory Management",
-            "fields": {
-                "name": "Designation",
-                "units": "Units",
-                "description": "Description"
-            }
-        }
-    },
-    "dialogs": {
-        "delete_item": {
-            "title": "Confirm Deletion",
-            "description": "Are you sure you want to delete {name}?",
-            "delete": "Delete",
-            "cancel": "Cancel"
-        }
-    },
-    "errors": {
-        "name_too_long": "Name is too long!",
-        "desc_too_long": "Description is too long!",
-        "min_characters": "Name must contain at least {number} characters!"
+    "titles": {
+      "warning": "Warning",
+      "add_new_item": "Add New Item"
     }
+  },
+  "components": {
+    "table": {
+      "total": "Total inventory",
+      "record": "Database record"
+    }
+  },
+  "features": {
+    "inventory": {
+      "title": "Inventory Management",
+      "fields": {
+        "name": "Designation",
+        "units": "Units",
+        "description": "Description"
+      }
+    }
+  },
+  "dialogs": {
+    "delete_item": {
+      "title": "Confirm Deletion",
+      "description": "Are you sure you want to delete {name}?",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    }
+  },
+  "errors": {
+    "name_too_long": "Name is too long!",
+    "desc_too_long": "Description is too long!",
+    "min_characters": "Name must contain at least {number} characters!"
+  }
 }

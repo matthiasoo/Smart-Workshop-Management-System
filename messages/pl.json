@@ -1,53 +1,54 @@
 {
-    "common": {
-        "actions": {
-            "register_item": "Zarejestruj Przedmiot",
-            "back": "Wróć",
-            "abort": "Przerwij",
-            "confirm": "Zatwierdź",
-            "save": "Zapisz zmiany",
-            "delete": "Usuń"
-        },
-        "status": {
-            "loading": "Łączenie z bazą danych",
-            "accessing": "Uzyskiwanie dostępu do rekordu",
-            "empty": "Brak elementów",
-            "not_found": "Nie znaleziono rekordu",
-            "success": "Akcja zakończona",
-            "out_of_stock": "Brak na stanie"
-        },
-        "titles": {
-            "warning": "Ostrzeżenie",
-            "add_new_item": "Dodaj Nowy Przedmiot"
-        }
+  "common": {
+    "actions": {
+      "register_item": "Zarejestruj Przedmiot",
+      "back": "Wróć",
+      "abort": "Przerwij",
+      "confirm": "Zatwierdź",
+      "save": "Zapisz zmiany",
+      "delete": "Usuń",
+      "search": "Wyszukaj"
     },
-    "components": {
-        "table": {
-            "total": "Całkowity stan magazynu",
-            "record": "Rekord w bazie"
-        }
+    "status": {
+      "loading": "Łączenie z bazą danych",
+      "accessing": "Uzyskiwanie dostępu do rekordu",
+      "empty": "Brak elementów",
+      "not_found": "Nie znaleziono rekordu",
+      "success": "Akcja zakończona",
+      "out_of_stock": "Brak na stanie"
     },
-    "features": {
-        "inventory": {
-            "title": "Zarządzanie Magazynem",
-            "fields": {
-                "name": "Nazwa przedmiotu",
-                "units": "Ilość",
-                "description": "Opis"
-            }
-        }
-    },
-    "dialogs": {
-        "delete_item": {
-            "title": "Potwierdź Usunięcie",
-            "description": "Czy na pewno chcesz na stałe usunąć {name}?",
-            "delete": "Usuń Bezpowrotnie",
-            "cancel": "Anuluj"
-        }
-    },
-    "errors": {
-        "name_too_long": "Nazwa jest zbyt długa!",
-        "desc_too_long": "Opis jest zbyt długi!",
-        "min_characters": "Nazwa musi zawierać co najmniej {number} litery!"
+    "titles": {
+      "warning": "Ostrzeżenie",
+      "add_new_item": "Dodaj Nowy Przedmiot"
     }
+  },
+  "components": {
+    "table": {
+      "total": "Całkowity stan magazynu",
+      "record": "Rekord w bazie"
+    }
+  },
+  "features": {
+    "inventory": {
+      "title": "Zarządzanie Magazynem",
+      "fields": {
+        "name": "Nazwa przedmiotu",
+        "units": "Ilość",
+        "description": "Opis"
+      }
+    }
+  },
+  "dialogs": {
+    "delete_item": {
+      "title": "Potwierdź Usunięcie",
+      "description": "Czy na pewno chcesz na stałe usunąć {name}?",
+      "delete": "Usuń Bezpowrotnie",
+      "cancel": "Anuluj"
+    }
+  },
+  "errors": {
+    "name_too_long": "Nazwa jest zbyt długa!",
+    "desc_too_long": "Opis jest zbyt długi!",
+    "min_characters": "Nazwa musi zawierać co najmniej {number} litery!"
+  }
 }

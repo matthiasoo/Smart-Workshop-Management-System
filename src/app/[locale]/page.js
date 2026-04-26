@@ -2,11 +2,15 @@ import { getTranslations } from 'next-intl/server';
 import { fetchInventory } from '@/actions/inventoryActions';
 import InventoryCard from '@/components/InventoryCard';
 import AddItemForm from '@/components/AddItemForm';
+import SearchBar from '@/components/SearchBar';
 
-export default async function Home() {
+export default async function Home({ params, searchParams }) {
     const t = await getTranslations();
 
-    const inventory = await fetchInventory();
+    const resolvedSearchParams = await searchParams; 
+    const searchQuery = resolvedSearchParams?.search || "";
+
+    const inventory = await fetchInventory({ search: searchQuery });
     const totalItems = inventory.reduce((ac, cur) => ac + cur.quantity, 0);
 
     return (
@@ -15,6 +19,7 @@ export default async function Home() {
                 <h2 className="text-xl text-muted font-medium uppercase tracking-widest">{t('components.table.total')}</h2>
                 <span className="font-mono font-bold text-3xl drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">{totalItems}</span>
             </div>
+            <SearchBar />
 
             <div className='flex flex-col lg:flex-row gap-8 w-full max-w-[1400px] items-start'>
                 <section className='flex-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 w-full auto-rows-max'>
@@ -23,7 +28,7 @@ export default async function Home() {
                     ))}
                     {inventory.length === 0 && <p className='text-muted mt-8'>{t('common.status.empty')}</p>}
                 </section>
-                
+
                 <section className='w-full lg:w-96 flex-shrink-0 sticky top-24'>
                     <AddItemForm />
                 </section>
